@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "789308968236",
+    "project_id": "my-firebase-project-e7c7b",
+    "storage_bucket": "my-firebase-project-e7c7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789308968236:android:87859d75e468d544057089",
+        "android_client_info": {
+          "package_name": "com.dea.firebase_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789308968236-jcvbkpoo6nv288v4lr308frrtf0s7ve0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXgOUOz3lJT5MeCH6V5G2gWLfRox7gLXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789308968236-jcvbkpoo6nv288v4lr308frrtf0s7ve0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "789308968236-03q7tdktf4pehf5dq770r4kdlbj5vmh6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dea.firebaseAuthApplication"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

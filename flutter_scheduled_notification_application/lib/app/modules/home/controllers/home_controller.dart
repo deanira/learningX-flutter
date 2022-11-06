@@ -1,23 +1,11 @@
+import 'package:flutter_scheduled_notification_application/app/data/medicine.dart';
+import 'package:flutter_scheduled_notification_application/app/helper/db_helper.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  var db = DbHelper();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Future<List<Medicine>> getAllMedicineData() async {
+    return await db.queryAllRowsMedicine();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import '../controllers/add_schedule_controller.dart';
 
 class AddScheduleView extends GetView<AddScheduleController> {
-  const AddScheduleView({Key? key}) : super(key: key);
+  dynamic frequency = 0;
+  TimeOfDay timeOfDay = TimeOfDay.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,8 +52,38 @@ class AddScheduleView extends GetView<AddScheduleController> {
                 labelText: 'Frequency',
               ),
               textInputAction: TextInputAction.next,
+              onEditingComplete: () {
+                frequency = int.parse(controller.frequencyController.text);
+                controller.timeController.length = frequency;
+                print(frequency);
+              },
+              // onChanged: (value) {
+              //   frequency = int.parse(value);
+              // },
             ),
           ),
+          Container(
+              height: 50,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: ListView.builder(
+                itemCount: frequency,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: TextField(
+                      controller: controller.timeController[index],
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: 'Time',
+                      ),
+                      textInputAction: TextInputAction.next,
+                      onTap: () => displayTimePicker(
+                          context, controller.timeController[index]),
+                    ),
+                  );
+                },
+              )),
           Container(
               height: 50,
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -72,5 +104,14 @@ class AddScheduleView extends GetView<AddScheduleController> {
         ],
       )),
     );
+  }
+
+  Future displayTimePicker(
+      BuildContext context, TextEditingController controller) async {
+    var time = await showTimePicker(context: context, initialTime: timeOfDay);
+
+    if (time != null) {
+      controller.text = "${time.hour}:${time.minute}";
+    }
   }
 }

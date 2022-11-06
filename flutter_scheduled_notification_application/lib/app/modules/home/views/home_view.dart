@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scheduled_notification_application/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
 
@@ -18,6 +19,12 @@ class HomeView extends GetView<HomeController> {
           'HomeView is working',
           style: TextStyle(fontSize: 20),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed(Routes.ADD_SCHEDULE);
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

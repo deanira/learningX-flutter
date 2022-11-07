@@ -11,7 +11,7 @@ class AddScheduleView extends GetView<AddScheduleController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('AddScheduleView'),
+          title: const Text('Add Medicine Schedule'),
           centerTitle: true,
         ),
         body: Form(
@@ -23,7 +23,7 @@ class AddScheduleView extends GetView<AddScheduleController> {
                 alignment: Alignment.center,
                 padding: EdgeInsets.all(10),
                 child: const Text(
-                  'Add Medicine Page',
+                  'Add Medicine Schedule',
                   style: TextStyle(
                       color: Colors.indigo,
                       fontWeight: FontWeight.w500,

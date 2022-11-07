@@ -13,7 +13,7 @@ class DetailMedicineView extends GetView<DetailMedicineController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('DetailMedicineView'),
+          title: const Text('Detail Medicine Schedule'),
           centerTitle: true,
         ),
         body: ListView(

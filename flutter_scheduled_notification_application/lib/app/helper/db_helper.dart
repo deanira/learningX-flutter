@@ -131,7 +131,7 @@ class DbHelper {
 
     List<Map<String, dynamic>> notifications = await db.query(
         notificationTableName,
-        orderBy: "$notificationColumnId DESC",
+        orderBy: "$notificationColumnId ASC",
         where: '$notificationColumnIdMedicine == ?',
         whereArgs: [idMedicince]);
     return List.generate(

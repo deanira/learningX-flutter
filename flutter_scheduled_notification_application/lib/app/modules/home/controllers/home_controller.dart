@@ -4,8 +4,18 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   var db = DbHelper();
+  List<Medicine> listMedicines = <Medicine>[].obs;
 
-  Future<List<Medicine>> getAllMedicineData() async {
-    return await db.queryAllRowsMedicine();
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getAllMedicineData();
+  }
+
+  Future getAllMedicineData() async {
+    listMedicines.clear();
+    final List<Medicine> medicines = await db.queryAllRowsMedicine();
+    listMedicines.addAll(medicines);
   }
 }

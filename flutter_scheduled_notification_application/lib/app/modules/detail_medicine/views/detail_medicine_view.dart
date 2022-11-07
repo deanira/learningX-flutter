@@ -23,7 +23,10 @@ class DetailMedicineView extends GetView<DetailMedicineController> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListTile(
-                    title: Text(snapshot.data!.name),
+                    title: Text(
+                      snapshot.data!.name,
+                      style: TextStyle(fontSize: 20),
+                    ),
                     subtitle: Text(
                         "${snapshot.data!.frequency.toString()} kali sehari"),
                   );
@@ -54,19 +57,23 @@ class DetailMedicineView extends GetView<DetailMedicineController> {
                 }
               },
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.indigo,
-                onPrimary: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32.0),
-                ),
-              ),
-              child: const Text('I don\'t need to take this medicine anymore'),
-              onPressed: () {
-                controller.deleteMedicine(Get.arguments);
-              },
-            ),
+            Container(
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.indigo,
+                    onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
+                  child:
+                      const Text('I don\'t need to take this medicine anymore'),
+                  onPressed: () {
+                    controller.deleteMedicine(Get.arguments);
+                  },
+                ))
           ],
         ));
   }

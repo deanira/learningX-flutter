@@ -1,8 +1,9 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 class NotificationApi {
-  static final _notificationss = FlutterLocalNotificationsPlugin();
+  static final _notification = FlutterLocalNotificationsPlugin();
 
   static Future init({
     bool initScheduled = false,
@@ -10,7 +11,7 @@ class NotificationApi {
     const androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
     const settings = InitializationSettings(android: androidSettings);
-    await _notificationss.initialize(
+    await _notification.initialize(
       settings,
       onDidReceiveNotificationResponse: (payload) async {
         print('notification payload: $payload');
@@ -37,7 +38,7 @@ class NotificationApi {
     required String body,
     required String payload,
   }) =>
-      _notificationss.show(
+      _notification.show(
         id,
         title,
         body,
@@ -53,10 +54,10 @@ class NotificationApi {
         ),
         payload: payload,
       );
-  static Future cancelNotification(int id) => _notificationss.cancel(id);
-  static Future cancelAllNotification() => _notificationss.cancelAll();
+  static Future cancelNotification(int id) => _notification.cancel(id);
+  static Future cancelAllNotification() => _notification.cancelAll();
   static Future cancelNotificationByTag(String tag) =>
-      _notificationss.cancel(0, tag: tag);
+      _notification.cancel(0, tag: tag);
 
   static Future scheduledNotification({
     required int id,
@@ -65,7 +66,7 @@ class NotificationApi {
     required String payload,
     required Time scheduledDate,
   }) async {
-    _notificationss.zonedSchedule(
+    _notification.zonedSchedule(
       id,
       title,
       body,
@@ -89,7 +90,9 @@ class NotificationApi {
   }
 
   static tz.TZDateTime _scheduledDaily(Time time) {
-    final now = tz.TZDateTime.now(tz.local);
+    tz.initializeTimeZones();
+    final jakarta = tz.getLocation('Asia/Jakarta');
+    final now = tz.TZDateTime.now(jakarta);
     tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month,
         now.day, time.hour, time.minute, time.second);
 

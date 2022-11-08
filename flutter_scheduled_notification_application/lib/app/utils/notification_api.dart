@@ -1,6 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/data/latest.dart' as tz;
 
 class NotificationApi {
   static final _notification = FlutterLocalNotificationsPlugin();
@@ -90,7 +89,7 @@ class NotificationApi {
   }
 
   static tz.TZDateTime _scheduledDaily(Time time) {
-    tz.initializeTimeZones();
+    // tz.initializeTimeZones();
     final jakarta = tz.getLocation('Asia/Jakarta');
     final now = tz.TZDateTime.now(jakarta);
     tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_scheduled_notification_application/app/data/medicine.dart';
 import 'package:flutter_scheduled_notification_application/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
@@ -16,7 +15,7 @@ class HomeView extends GetView<HomeController> {
       ),
       body: Obx(() {
         if (controller.listMedicines.isEmpty) {
-          return Center(
+          return const Center(
             child: Text('No Data'),
           );
         } else {

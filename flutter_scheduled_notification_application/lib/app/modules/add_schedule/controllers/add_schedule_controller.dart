@@ -55,4 +55,15 @@ class AddScheduleController extends GetxController {
     homeController.getAllMedicineData();
     Get.back();
   }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    nameController.dispose();
+    frequencyController.dispose();
+    for (var element in timeController) {
+      element.dispose();
+    }
+  }
 }

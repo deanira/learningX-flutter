@@ -41,16 +41,29 @@ class AddScheduleController extends GetxController {
     List<notif.Notification> notifications =
         await db.getNotificationsByMedicineId(lastMedicineId);
 
-    for (var element in notifications) {
-      NotificationApi.scheduledNotification(
-        id: element.id!,
+    for (int i = 0; i < notifications.length; i++) {
+      print("making notification ${notifications[i].id}");
+      await NotificationApi.scheduledNotification(
+        id: notifications[i].id!,
         title: "Waktunya minum obat $name",
         body: "Minum obat agar cepat sembuh :)",
         payload: name,
-        scheduledDate: Time(int.parse(element.time.split(':')[0]),
-            int.parse(element.time.split(':')[1]), 0),
-      );
+        scheduledDate: Time(int.parse(notifications[i].time.split(':')[0]),
+            int.parse(notifications[i].time.split(':')[1]), 0),
+      ).then((value) => print("notif ${notifications[i].id} scheduled"));
     }
+
+    // for (var element in notifications) {
+    //   await NotificationApi.scheduledNotification(
+    //     id: element.id!,
+    //     title: "Waktunya minum obat $name",
+    //     body: "Minum obat agar cepat sembuh :)",
+    //     payload: name,
+    //     scheduledDate: Time(int.parse(element.time.split(':')[0]),
+    //         int.parse(element.time.split(':')[1]), 0),
+    //   );
+    //   print("notif ${element.id} scheduled");
+    // }
 
     homeController.getAllMedicineData();
     Get.back();

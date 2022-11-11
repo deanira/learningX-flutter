@@ -18,19 +18,6 @@ class NotificationApi {
     );
   }
 
-  static Future notificationsDetail() async {
-    return const NotificationDetails(
-      android: AndroidNotificationDetails(
-        'channel id',
-        'channel name',
-        channelDescription: 'channel description',
-        importance: Importance.max,
-        priority: Priority.high,
-        showWhen: false,
-      ),
-    );
-  }
-
   static Future showNotification({
     required int id,
     required String title,
@@ -65,7 +52,8 @@ class NotificationApi {
     required String payload,
     required Time scheduledDate,
   }) async {
-    _notification.zonedSchedule(
+    print("enter scheduledNotification");
+    await _notification.zonedSchedule(
       id,
       title,
       body,
@@ -86,15 +74,17 @@ class NotificationApi {
       payload: payload,
       matchDateTimeComponents: DateTimeComponents.time,
     );
+    print("finished scheduledNotification");
   }
 
   static tz.TZDateTime _scheduledDaily(Time time) {
-    // tz.initializeTimeZones();
+    print("enter _scheduledDaily");
     final jakarta = tz.getLocation('Asia/Jakarta');
     final now = tz.TZDateTime.now(jakarta);
     tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month,
         now.day, time.hour, time.minute, time.second);
-
+    print("before return _scheduledDaily");
+    
     return scheduledDate.isBefore(now)
         ? scheduledDate = scheduledDate.add(const Duration(days: 1))
         : scheduledDate;

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_application/app/modules/login/views/login_view.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -22,16 +23,28 @@ class HomeController extends GetxController {
       Get.defaultDialog(
           title: "Delete Post",
           middleText: "Are you sure you want to delete this post?",
-          onConfirm: () async {
-            await firestore.collection('posts').doc(docID).delete();
+          onConfirm: () {
+            firestore.collection('posts').doc(docID).delete();
             Get.back();
-            Get.snackbar('Success', 'Data deleted successfully');
+            Get.snackbar(
+              'Success',
+              'Data deleted successfully',
+              snackPosition: SnackPosition.BOTTOM,
+              duration: Duration(seconds: 2),
+              margin: EdgeInsets.all(12),
+            );
           },
           textConfirm: "Yes, I'm sure",
           textCancel: "No");
     } catch (e) {
       print(e);
-      Get.snackbar('Error', 'Cannot delete this post');
+      Get.snackbar(
+        'Error',
+        'Cannot delete this post',
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: 2),
+        margin: EdgeInsets.all(12),
+      );
     }
   }
 

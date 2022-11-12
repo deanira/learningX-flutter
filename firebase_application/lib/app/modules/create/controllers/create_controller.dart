@@ -15,7 +15,13 @@ class CreateController extends GetxController {
           .add({'title': title, 'description': description, 'time': dateNow});
 
       Get.back();
-      Get.snackbar('Success', 'Data added successfully');
+      Get.snackbar(
+        'Success',
+        'Data added successfully',
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: 2),
+        margin: EdgeInsets.all(12),
+      );
       titleController.clear();
       descriptionController.clear();
     } catch (e) {

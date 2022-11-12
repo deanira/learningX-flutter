@@ -12,7 +12,13 @@ class RegisterController extends GetxController {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      Get.snackbar('Success', 'User created successfully');
+      Get.snackbar(
+        'Success',
+        'User created successfully',
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: 2),
+        margin: EdgeInsets.all(12),
+      );
       userCredential.user!.sendEmailVerification();
       Get.defaultDialog(
           title: 'Verify your email',
@@ -26,13 +32,31 @@ class RegisterController extends GetxController {
           },
           onCancel: () {
             userCredential.user!.sendEmailVerification();
-            Get.snackbar('Success', 'Email verification link sent');
+            Get.snackbar(
+              'Success',
+              'Email verification link sent',
+              snackPosition: SnackPosition.BOTTOM,
+              duration: Duration(seconds: 2),
+              margin: EdgeInsets.all(12),
+            );
           });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        Get.snackbar('Error', 'The password provided is too weak.');
+        Get.snackbar(
+          'Error',
+          'The password provided is too weak.',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 2),
+          margin: EdgeInsets.all(12),
+        );
       } else if (e.code == 'email-already-in-use') {
-        Get.snackbar('Error', 'The account already exists for that email.');
+        Get.snackbar(
+          'Error',
+          'The account already exists for that email.',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 2),
+          margin: EdgeInsets.all(12),
+        );
       }
       print(e.code);
     } catch (e) {

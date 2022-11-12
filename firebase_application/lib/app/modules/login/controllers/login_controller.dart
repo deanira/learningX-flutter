@@ -16,21 +16,51 @@ class LoginController extends GetxController {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (userCredential.user!.emailVerified) {
-        Get.snackbar('Success', 'User logged in successfully');
+        Get.snackbar(
+          'Success',
+          'User logged in successfully',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 2),
+          margin: EdgeInsets.all(12),
+        );
         Get.offAllNamed(Routes.HOME);
       } else {
-        Get.snackbar('Error', 'Please verify your email');
+        Get.snackbar(
+          'Error',
+          'Please verify your email',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 2),
+          margin: EdgeInsets.all(12),
+        );
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('wrong email');
-        Get.snackbar('Error', 'No user found for that email.');
+        Get.snackbar(
+          'Error',
+          'No user found for that email.',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 2),
+          margin: EdgeInsets.all(12),
+        );
       } else if (e.code == 'wrong-password') {
         print('wrong password');
-        Get.snackbar('Error', 'Wrong password provided for that user.');
+        Get.snackbar(
+          'Error',
+          'Wrong password provided for that user.',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 2),
+          margin: EdgeInsets.all(12),
+        );
       } else if (e.code == 'too-many-requests') {
         print('too-many-requests');
-        Get.snackbar('Error', 'Too many requests. Try again later.');
+        Get.snackbar(
+          'Error',
+          'Too many requests. Try again later.',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 2),
+          margin: EdgeInsets.all(12),
+        );
       }
       print(e.code);
     } catch (e) {

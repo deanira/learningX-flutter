@@ -28,6 +28,9 @@ class LoginController extends GetxController {
       } else if (e.code == 'wrong-password') {
         print('wrong password');
         Get.snackbar('Error', 'Wrong password provided for that user.');
+      } else if (e.code == 'too-many-requests') {
+        print('too-many-requests');
+        Get.snackbar('Error', 'Too many requests. Try again later.');
       }
       print(e.code);
     } catch (e) {

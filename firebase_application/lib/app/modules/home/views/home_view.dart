@@ -46,21 +46,28 @@ class HomeView extends GetView<HomeController> {
           stream: controller.streamData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
-              var data = snapshot.data!.docs;
-              return ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    onTap: () =>
-                        Get.toNamed(Routes.UPDATE, arguments: data[index].id),
-                    title: Text(data[index]['title']),
-                    subtitle: Text(data[index]['description']),
-                    trailing: IconButton(
-                        onPressed: () => controller.deleteData(data[index].id),
-                        icon: Icon(Icons.delete)),
-                  );
-                },
-              );
+              if (snapshot.data!.size != 0) {
+                var data = snapshot.data!.docs;
+                return ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      onTap: () =>
+                          Get.toNamed(Routes.UPDATE, arguments: data[index].id),
+                      title: Text(data[index]['title']),
+                      subtitle: Text(data[index]['description']),
+                      trailing: IconButton(
+                          onPressed: () =>
+                              controller.deleteData(data[index].id),
+                          icon: Icon(Icons.delete)),
+                    );
+                  },
+                );
+              } else {
+                return const Center(
+                  child: Text('No data'),
+                );
+              }
             } else {
               return const Center(
                 child: CircularProgressIndicator(),

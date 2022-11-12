@@ -7,10 +7,10 @@ class HomeController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<QuerySnapshot<Object?>> getData() async {
-    CollectionReference data = await firestore.collection('posts');
-    return data.get();
-  }
+  // Future<QuerySnapshot<Object?>> getData() async {
+  //   CollectionReference data = await firestore.collection('posts');
+  //   return data.get();
+  // }
 
   Stream<QuerySnapshot<Object?>> streamData() {
     CollectionReference data = firestore.collection('posts');

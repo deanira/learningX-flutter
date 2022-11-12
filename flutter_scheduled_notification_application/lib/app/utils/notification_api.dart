@@ -4,6 +4,11 @@ import 'package:timezone/timezone.dart' as tz;
 class NotificationApi {
   static final _notification = FlutterLocalNotificationsPlugin();
 
+  static Future cancelNotification(int id) => _notification.cancel(id);
+  static Future cancelAllNotification() => _notification.cancelAll();
+  static Future cancelNotificationByTag(String tag) =>
+      _notification.cancel(0, tag: tag);
+      
   static Future init({
     bool initScheduled = false,
   }) async {
@@ -40,10 +45,6 @@ class NotificationApi {
         ),
         payload: payload,
       );
-  static Future cancelNotification(int id) => _notification.cancel(id);
-  static Future cancelAllNotification() => _notification.cancelAll();
-  static Future cancelNotificationByTag(String tag) =>
-      _notification.cancel(0, tag: tag);
 
   static Future scheduledNotification({
     required int id,
@@ -84,7 +85,7 @@ class NotificationApi {
     tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month,
         now.day, time.hour, time.minute, time.second);
     print("before return _scheduledDaily");
-    
+
     return scheduledDate.isBefore(now)
         ? scheduledDate = scheduledDate.add(const Duration(days: 1))
         : scheduledDate;

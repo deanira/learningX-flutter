@@ -2,7 +2,7 @@ import 'package:flutter_scheduled_notification_application/app/data/medicine.dar
 import 'package:flutter_scheduled_notification_application/app/helper/db_helper.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with StateMixin<List<Medicine>> {
   var db = DbHelper();
   List<Medicine> listMedicines = <Medicine>[].obs;
 
@@ -14,8 +14,10 @@ class HomeController extends GetxController {
   }
 
   Future getAllMedicineData() async {
+    change(null, status: RxStatus.loading());
     listMedicines.clear();
     final List<Medicine> medicines = await db.queryAllRowsMedicine();
     listMedicines.addAll(medicines);
+    change(null, status: RxStatus.success());
   }
 }

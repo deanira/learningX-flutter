@@ -13,26 +13,20 @@ class HomeView extends GetView<HomeController> {
         title: const Text('Home'),
         centerTitle: true,
       ),
-      body: Obx(() {
-        if (controller.listMedicines.isEmpty) {
-          return const Center(
-            child: Text('No Data'),
-          );
-        } else {
-          return ListView.builder(
-            itemCount: controller.listMedicines.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(controller.listMedicines[index].name),
-                subtitle: Text(
-                    "${controller.listMedicines[index].frequency.toString()} kali sehari"),
-                onTap: () => Get.toNamed(Routes.DETAIL_MEDICINE,
+      body: controller.obx((state) =>
+        ListView.builder(
+          itemCount: controller.listMedicines.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(controller.listMedicines[index].name),
+              subtitle: Text("${controller.listMedicines[index].frequency.toString()} kali sehari"),
+              onTap: () => Get.toNamed(Routes.DETAIL_MEDICINE,
                     arguments: controller.listMedicines[index].id),
-              );
-            },
-          );
-        }
-      }),
+            );
+          },
+        ),
+      onLoading: Center(child: CircularProgressIndicator()),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed(Routes.ADD_SCHEDULE);

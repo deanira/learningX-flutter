@@ -18,6 +18,6 @@ class HomeController extends GetxController with StateMixin<List<Medicine>> {
     listMedicines.clear();
     final List<Medicine> medicines = await db.queryAllRowsMedicine();
     listMedicines.addAll(medicines);
-    change(null, status: RxStatus.success());
+    change(listMedicines, status: RxStatus.success());
   }
 }

@@ -27,6 +27,7 @@ class HomeView extends GetView<HomeController> {
           },
         ),
         onLoading: Center(child: CircularProgressIndicator()),
+        onEmpty: Center(child: Text("Data Kosong")),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

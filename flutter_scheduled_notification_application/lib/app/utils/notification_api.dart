@@ -81,6 +81,7 @@ class NotificationApi {
   static tz.TZDateTime _scheduledDaily(Time time) {
     print("enter _scheduledDaily");
     final jakarta = tz.getLocation('Asia/Jakarta');
+    tz.setLocalLocation(jakarta);
     final now = tz.TZDateTime.now(jakarta);
     tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month,
         now.day, time.hour, time.minute, time.second);

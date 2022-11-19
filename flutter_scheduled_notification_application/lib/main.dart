@@ -6,7 +6,7 @@ import 'app/routes/app_pages.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 void main() {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   tz.initializeTimeZones();
   runApp(
     GetMaterialApp(
